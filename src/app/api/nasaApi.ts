@@ -1,4 +1,4 @@
-import { NasaApiResponse } from "@/app/types/nasaApiTypes";
+import { NasaApiResponse } from "@/types/nasaApiTypes";
 import { NextApiResponse } from "next";
 
 export default async function getImages(res: NextApiResponse) {
