@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Apod from '@/components/apod/Apod'
 
 export default function Home() {

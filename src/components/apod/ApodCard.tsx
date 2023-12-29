@@ -1,6 +1,5 @@
 import React from 'react';
 import { ApodCardProps } from '@/types/types';
-import Image from 'next/image';
 
 const ApodCard: React.FC<ApodCardProps> = ({ apodData }) => {
     return (
