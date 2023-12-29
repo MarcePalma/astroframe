@@ -1,7 +1,7 @@
 import { NasaApiResponse } from "@/types/nasaApiTypes";
 import { NextApiResponse } from "next";
 
-export default async function getImages(res: NextApiResponse) {
+export async function GET(res: NextApiResponse) {
     try {
         const apiKey = process.env.API_KEY
         if (!apiKey) {
@@ -13,10 +13,10 @@ export default async function getImages(res: NextApiResponse) {
             throw new Error(`Error al obtener la imagen del día. Código de estado: ${response.status}`)
         }
         const data: NasaApiResponse = await response.json();
-        res.status(200).json(data)
+        return new Response(JSON.stringify(data), { status: 200 })
     }
-    catch (error){
+    catch (error) {
         console.error("Error al obtener la imagen del dia:", error)
-        res.status(500).json({error:"Error al obtener la imagen del dia."})
+        return new Response(JSON.stringify({ error: "Error al obtener la imagen del día." }), { status: 500 });
     }
 }

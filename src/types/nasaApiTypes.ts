@@ -6,4 +6,5 @@ export interface NasaApiResponse {
     service_version: string;
     title: string;
     url: string;
+    error?: string;
 }
