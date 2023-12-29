@@ -1,7 +1,7 @@
 import { NasaApiResponse } from "@/types/nasaApiTypes";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function GET(req: NextApiRequest, res: NextApiResponse) {
     try {
         const apiKey = process.env.API_KEY;
         if (!apiKey) {
