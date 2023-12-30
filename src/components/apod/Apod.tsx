@@ -11,7 +11,7 @@ const Apod: React.FC = () => {
     useEffect(() => {
         const getApodFromServer = async () => {
             try {
-                const response = await fetch('https://astroframe-4txsz9cps-marcepalma.vercel.app/api/nasaApi', {
+                const response = await fetch('http://localhost:3000/api/nasaApi', {
                     method: 'GET',
                 });
 
