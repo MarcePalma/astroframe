@@ -1,9 +1,11 @@
 import React from 'react';
-import './SolarSystem.css';  // Archivo de estilos CSS
+import './SolarSystem.css';
+import StarsParticles from '../particles/StarParticles';
 
 const SolarSystem = () => {
   return (
-    <section className="solar-system">
+    <section className="solar-system relative">
+      <StarsParticles />
       <span className="sun"></span>
       <span className="planet mercury"></span>
       <span className="planet venus"></span>

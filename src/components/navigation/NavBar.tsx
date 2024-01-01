@@ -13,14 +13,13 @@ export default function Navbar() {
 
     const navLinks: MenuOverlayProps[] = [
         {
-            title: 'Calendar',
-            path: '/Calendar',
+            title: 'CALENDAR',
+            path: '/calendar',
         },
     ];
 
     return (
-        <nav className="fixed mx-auto border border-[#33353F] top-0 left-0 right-0 z-10 bg-[#232741] bg-opacity-100">
-            <StarsParticles />
+        <nav className="fixed mx-auto border border-[#33353F] top-0 left-0 right-0 z-10 bg-[#000] bg-opacity-100">
             <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-4 py-2">
                 <Link href={'/'} className="flex justify-between items-center text-2xl md:text-5xl text-white font-semibold">
                     <Image width={70} height={70} src="/assets/images/Icon.png" alt="Logo" />

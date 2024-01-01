@@ -1,159 +1,151 @@
-.solar-system {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-    background: #000;
-}
-
-span {
-    display: flex;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-}
-
-.sun {
-    width: 60px;
-    height: 60px;
-    background: #ff8b17;
-    box-shadow: 0 0 10px #ff8b17, 0 0 20px #ff8b17, 0 0 40px #ff8b17, 0 0 60px #ff8b17;
-    z-index: 9999;
-}
-
-.planet {
-    background: transparent;
-    border: 4px solid rgba(255, 255, 255, .5);
-    animation: animate 10s linear infinite;
-}
-
-@keyframes animate{
-    0%{
-        transform: translate(-50%, -50%) rotate(0);
+    .solar-system {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
     }
-    100%{
-        transform: translate(-50%, -50%) rotate(360deg);
+
+    span {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
     }
-}
 
-.mercury {
-    width: 110px;
-    height: 110px;
-}
+    .sun {
+        width: 60px;
+        height: 60px;
+        background: #ff8b17;
+        box-shadow: 0 0 10px #ff8b17, 0 0 20px #ff8b17, 0 0 40px #ff8b17, 0 0 60px #ff8b17;
+        z-index: 9999;
+    }
 
-.venus {
-    width: 160px;
-    height: 160px;
-}
+    .planet {
+        background: transparent;
+        border: 4px solid rgba(255, 255, 255, .5);
+        animation: animate 10s linear infinite;
+    }
 
-.earth {
-    width: 220px;
-    height: 220px;
-}
+    @keyframes animate{
+        0%{
+            transform: translate(-50%, -50%) rotate(0);
+        }
+        100%{
+            transform: translate(-50%,-50%) rotate(360deg);
+        }
+    }
 
-.mars {
-    width: 270px;
-    height: 270px;
-}
+    .mercury {
+        width: 110px;
+        height: 110px;
+    }
 
-.jupiter {
-    width: 340px;
-    height: 340px;
-}
+    .venus {
+        width: 160px;
+        height: 160px;
+    }
 
-.saturn {
-    width: 430px;
-    height: 430px;
-}
+    .earth {
+        width: 220px;
+        height: 220px;
+    }
 
-.uranus {
-    width: 500px;
-    height: 500px;
-}
+    .mars {
+        width: 270px;
+        height: 270px;
+    }
 
-.neptune {
-    width: 570px;
-    height: 570px;
-}
+    .jupiter {
+        width: 340px;
+        height: 340px;
+    }
 
-span::before, span::after{
-    content: '';
-    position: absolute;
-    background: #fff;
-    border-radius: 50%;
+    .saturn {
+        width: 430px;
+        height: 430px;
+    }
 
-}
+    .uranus {
+        width: 500px;
+        height: 500px;
+    }
 
-.mercury::before{
-    width: 20px;
-    height: 20px;
-    bottom: 6px;
-    left: 2px;background: #979797;
-}
+    .neptune {
+        width: 570px;
+        height: 570px;
+    }
 
-.venus::before{
-    width: 25px;
-    height: 25px;
-    top: 10px;
-    left: 10px;
-    background: #ff2c00;
-}
+    span::before, span::after{
+        content: '';
+        position: absolute;
+        background: #fff;
+        border-radius: 50%;
 
-.earth::before{
-    width: 30px;
-    height: 30px;
-    top: 100px;
-    right: -15px;
-    background: #0099ff;
-}
+    }
 
-.mars::before{
-    width: 40px;
-    height: 40px;
-    top: 22px;
-    left: 210px;
-    background: #ff2433;
-}
+    .mercury::before{
+        width: 20px;
+        height: 20px;
+        bottom: 6px;
+        left: 2px;background:url("https://i.imgur.com/fWwIAFp.png") center/cover;
+    }
 
-.jupiter::before{
-    width: 40px;
-    height: 40px;
-    bottom: -18px;
-    left: 170px;
-    background: #ffb624;
-}
+    .venus::before{
+        width: 25px;
+        height: 25px;
+        top: 10px;
+        left: 10px;
+        background: url("https://i.imgur.com/4fFRQmP.png") center/cover;
+    }
 
-.saturn::before{
-    width: 50px;
-    height: 50px;
-    top: 100px;
-    left: -7px;
-    background: #ffb84d;
-}
-.saturn::after{
-    width: 80px;
-    height: 20px;
-    top: 115px;
-    left: -21px;
-    background: #ffb84d;
-}
+    .earth::before{
+        width: 30px;
+        height: 30px;
+        top: 100px;
+        right: -15px;
+        background: url('https://i.imgur.com/48hhB3s.png') center/cover;
+    }
 
-.uranus::before{
-    width: 37px;
-    height: 37px;
-    bottom: 80px;
-    right: 30px;
-    background: #4d6bff;
-}
+    .mars::before{
+        width: 40px;
+        height: 40px;
+        top: 22px;
+        left: 210px;
+        background: url("https://i.imgur.com/Vu3FaZf.png") center/cover;
+    }
+
+    .jupiter::before{
+        width: 40px;
+        height: 40px;
+        bottom: -18px;
+        left: 170px;
+        background: url("https://i.imgur.com/lI3o8gW.png") center/cover;
+    }
+
+    .saturn::before{
+        width: 50px;
+        height: 50px;
+        top: 100px;
+        left: -7px;
+        background: url("https://i.imgur.com/ObdhmQY.png") center/cover;
+    }
+
+    .uranus::before{
+        width: 37px;
+        height: 37px;
+        bottom: 80px;
+        right: 30px;
+        background: url("https://i.imgur.com/dY7GBTf.png") center/cover;
+    }
 
 
-.neptune::before{
-    width: 41px;
-    height: 41px;
-    top: 5px;
-    right: 140px;
-    background: #d04dff;
-}
+    .neptune::before{
+        width: 41px;
+        height: 41px;
+        top: 5px;
+        right: 140px;
+        background: url("https://i.imgur.com/uVXENXb.png") center/cover;
+    }
