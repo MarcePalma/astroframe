@@ -1,254 +1,130 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react';
+import Image from 'next/image';
+import "./Calendar.css";
+import { useRouter } from 'next/navigation';
+import { fetchApodData } from '../../../public/assets/utils/fetchApod';
+import { NasaApiResponse } from '@/types/nasaApiTypes';
+
 
 export default function Calendar() {
+    const [currentMonth, setCurrentMonth] = useState(0);
+    const [currentYear, setCurrentYear] = useState(2024);
+    const [selectedDate, setSelectedDate] = useState<string | null>(null);
+    const router = useRouter();
+
+    const changeMonth = (increment: number) => {
+        setCurrentMonth((prevMonth) => (prevMonth + increment) % 12);
+        setCurrentYear((prevYear) => currentMonth + increment > 11 ? prevYear + 1 : (currentMonth + increment < 0 ? prevYear - 1 : prevYear));
+    };
+
+    const handleDateClick = (day: number) => {
+        const clickedDate = new Date(currentYear, currentMonth, day);
+        const formattedDate = clickedDate.toISOString().split('T')[0];
+
+        setSelectedDate(formattedDate);
+
+        // Realiza el fetch con la fecha seleccionada
+        // Asume que tienes una función fetchApodData que realiza el fetch
+        fetchApodData(formattedDate)
+            .then((apodData: NasaApiResponse) => {
+                // Redirige a la página /apod con la fecha como parámetro
+                router.push({ pathname: '/apod', query: { date: formattedDate } } as any);
+            })
+            .catch((error: Error) => {
+                console.error('Error al obtener datos de APOD:', error);
+                // Maneja el error según sea necesario
+            });
+    };
+
+
+
+    const getDaysInMonth = () => {
+        const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+        const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
+        return { firstDay, lastDay };
+    };
+
+    const generateDays = () => {
+        const { firstDay, lastDay } = getDaysInMonth();
+        const days = [];
+
+        for (let i = 0; i < firstDay; i++) {
+            days.push(
+                <span key={`prev-${i}`} className="px-1 text-gray-400 w-14 flex justify-center items-center">
+                    {/* Calcula los días anteriores */}
+                </span>
+            );
+        }
+
+        for (let i = 1; i <= lastDay; i++) {
+            days.push(
+                <span
+                    key={i}
+                    onClick={() => handleDateClick(i)}
+                    className={`px-1 w-14 flex justify-center items-center border ${i === 24 && currentMonth === 0
+                        ? 'hover:border-slate-500 text-gray hover:text-slate-500'
+                        : i === 25
+                            ? ' text-black bg-white-500 rounded-2xl cursor-pointer shadow-md'
+                            : 'hover:border-green-500 hover:text-green-500 cursor-pointer'
+                        }`}
+                >
+                    {i < 10 ? `0${i}` : i}
+                </span>
+            );
+
+            if ((i + firstDay) % 7 === 0) {
+                days.push(<span key={`br-${i}`} className="w-full" />);
+            }
+        }
+
+        return days;
+    };
+
+
+
     return (
         <section>
+            <section>
+                <Image className='Bounce absolute top-10' src={"/assets/images/background/planets.png"} width={400} height={400} alt='Planets'></Image>
+                <Image className="absolute top-40" src={"/assets/images/background/meditatingastroboy.png"} width={400} height={400} alt='Astroboy meditating'></Image>
+            </section>
+            <section className="message-container">
+                <p className="astro-message">
+                This is the Calendar section! 
+                <br />Choose a day and discover the photo
+                </p>
+            </section>
             <div className='flex items-center justify-center min-h-screen'>
-                <div className='w-full max-w-lg p-6 mx-auto bg-white rounded-2xl shadow-xl flex flex-col'>
+                <div className='w-full max-w-lg p-6 mx-auto bg-white rounded-2xl overflow-hidden'>
                     <div className="flex justify-between pb-4">
-                        <div className="-rotate-90 cursor-pointer">
+                        <div className="-rotate-90 cursor-pointer" onClick={() => changeMonth(-1)}>
                             <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.001 6L6.00098 1L1.00098 6" stroke="black" stroke-opacity="0.4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M11.001 6L6.00098 1L1.00098 6" stroke="black" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
-                        <span className="uppercase text-sm font-semibold text-gray-600">january - 2022</span>
-                        <div className="rotate-90 cursor-pointer">
+                        <span className="uppercase text-sm font-semibold text-gray-600">{`${new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' })} - ${currentYear}`}</span>
+                        <div className="rotate-90 cursor-pointer" onClick={() => changeMonth(1)}>
                             <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.001 6L6.00098 1L1.00098 6" stroke="black" stroke-opacity="0.4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M11.001 6L6.00098 1L1.00098 6" stroke="black" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
-
                     </div>
                     <div className="flex justify-between font-medium uppercase text-xs pt-4 pb-2 border-t">
-
-                        <div className="px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
-                            sun
-                        </div>
-
-
-                        <span className="px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
-                            mon
-                        </span>
-
-
-                        <span className="px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
-                            tue
-                        </span>
-
-
-                        <span className="px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
-                            wed
-                        </span>
-
-
-                        <span className="px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
-                            thu
-                        </span>
-
-
-                        <span className="px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
-                            fri
-                        </span>
-
-
-                        <span className="px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
-                            sat
-                        </span>
-
-                    </div>
-
-                    <div className="flex justify-between font-medium text-sm pb-2">
-
-                        <span className="px-1 text-gray-400 w-14 flex justify-center items-center">
-                            30
-                        </span>
-
-
-                        <span className="px-1 text-gray-400 w-14 flex justify-center items-center">
-                            31
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            01
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            02
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            03
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            04
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            05
-                        </span>
-
                     </div>
                     <div className="flex justify-between font-medium text-sm pb-2">
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            06
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            07
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            08
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            09
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            10
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            11
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            12
-                        </span>
-
+                        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+                            <div key={day} className="flex-none w-14 h-5 px-3 border rounded-sm flex justify-center items-center border-green-500 text-green-500 shadow-md">
+                                {day}
+                            </div>
+                        ))}
                     </div>
-
-                    <div className="flex justify-between font-medium text-sm pb-2">
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500  cursor-pointer">
-                            13
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            14
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            15
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            16
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            17
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            18
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            19
-                        </span>
-
+                    <div className="flex justify-between font-medium text-sm pb-2 flex-wrap">
+                        {/* Días del mes */}
+                        {generateDays()}
                     </div>
-
-                    <div className="flex justify-between font-medium text-sm pb-2">
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500  cursor-pointer">
-                            20
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            21
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            22
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            23
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            24
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border border-green-500 text-white bg-green-500 rounded-2xl cursor-pointer shadow-md">
-                            25
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            26
-                        </span>
-
-                    </div>
-
-                    <div className="flex justify-between font-medium text-sm pb-2">
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500  cursor-pointer">
-                            27
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            28
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            29
-                        </span>
-
-
-                        <span className="px-1 w-14 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer">
-                            30
-                        </span>
-
-
-                        <span className="px-1 text-gray-400 w-14 flex justify-center items-center">
-                            01
-                        </span>
-
-
-                        <span className="px-1 text-gray-400 w-14 flex justify-center items-center">
-                            02
-                        </span>
-
-
-                        <span className="px-1 text-gray-400 w-14 flex justify-center items-center">
-                            03
-                        </span>
-
-                    </div>
-
                 </div>
             </div>
         </section>
-    )
+    );
 }
-

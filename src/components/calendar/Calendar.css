@@ -1,0 +1,26 @@
+.message-container {
+    position: absolute;
+    top: 550px;
+    left: 50px;
+    background-color: black;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.astro-message {
+    color: white;
+}
+
+.Bounce{
+    animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(5px);
+    }
+  }

@@ -1,0 +1,13 @@
+.message-container {
+    position: absolute;
+    top: 1015px;
+    left: 1600px;
+    background-color: black;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.astro-message {
+    color: white;
+}

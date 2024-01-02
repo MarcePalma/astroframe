@@ -29,12 +29,13 @@
         animation: animate 10s linear infinite;
     }
 
-    @keyframes animate{
-        0%{
+    @keyframes animate {
+        0% {
             transform: translate(-50%, -50%) rotate(0);
         }
-        100%{
-            transform: translate(-50%,-50%) rotate(360deg);
+
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
         }
     }
 
@@ -78,7 +79,8 @@
         height: 570px;
     }
 
-    span::before, span::after{
+    span::before,
+    span::after {
         content: '';
         position: absolute;
         background: #fff;
@@ -86,14 +88,15 @@
 
     }
 
-    .mercury::before{
+    .mercury::before {
         width: 20px;
         height: 20px;
         bottom: 6px;
-        left: 2px;background:url("https://i.imgur.com/fWwIAFp.png") center/cover;
+        left: 2px;
+        background: url("https://i.imgur.com/fWwIAFp.png") center/cover;
     }
 
-    .venus::before{
+    .venus::before {
         width: 25px;
         height: 25px;
         top: 10px;
@@ -101,7 +104,7 @@
         background: url("https://i.imgur.com/4fFRQmP.png") center/cover;
     }
 
-    .earth::before{
+    .earth::before {
         width: 30px;
         height: 30px;
         top: 100px;
@@ -109,7 +112,7 @@
         background: url('https://i.imgur.com/48hhB3s.png') center/cover;
     }
 
-    .mars::before{
+    .mars::before {
         width: 40px;
         height: 40px;
         top: 22px;
@@ -117,7 +120,7 @@
         background: url("https://i.imgur.com/Vu3FaZf.png") center/cover;
     }
 
-    .jupiter::before{
+    .jupiter::before {
         width: 40px;
         height: 40px;
         bottom: -18px;
@@ -125,7 +128,7 @@
         background: url("https://i.imgur.com/lI3o8gW.png") center/cover;
     }
 
-    .saturn::before{
+    .saturn::before {
         width: 50px;
         height: 50px;
         top: 100px;
@@ -133,7 +136,7 @@
         background: url("https://i.imgur.com/ObdhmQY.png") center/cover;
     }
 
-    .uranus::before{
+    .uranus::before {
         width: 37px;
         height: 37px;
         bottom: 80px;
@@ -142,10 +145,29 @@
     }
 
 
-    .neptune::before{
+    .neptune::before {
         width: 41px;
         height: 41px;
         top: 5px;
         right: 140px;
         background: url("https://i.imgur.com/uVXENXb.png") center/cover;
+    }
+
+
+    .astroboy-container {
+        position: absolute;
+        right: 0;
+    }
+
+    .messageContainer {
+        background-color: black;
+        border: 1px solid white;
+        padding: 10px;
+        border-radius: 5px;
+        margin-right: 150px;
+    }
+
+    .message {
+        color: white;
+        margin: 0;
     }
