@@ -8,14 +8,12 @@ export async function GET(req: NextRequest, res: NextResponse) {
       throw new Error("La Api Key no está bien configurada!");
     }
 
-    console.log('Consulta recibida:', req.url);
-
-    const url = new URL(req.url || '', 'http://localhost');
-    const date = url.searchParams.get("date");
+    const queryParams = new URLSearchParams(req.url?.split("?")[1] || "");
+    const date = queryParams.get("date");
 
     if (!date) {
       console.error('La fecha no está presente en la consulta.');
-      return new Response(JSON.stringify({ error: "La fecha no esta presenten en la consulta" }), { status: 400 })
+      return new Response(JSON.stringify({ error: "La fecha no está presente en la consulta" }), { status: 400 })
     }
 
     const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
