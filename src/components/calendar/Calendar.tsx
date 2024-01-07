@@ -27,7 +27,6 @@ export default function Calendar() {
     
         console.log('Fecha seleccionada:', formattedDate);
     
-        // Verifica la construcción de la URL
         const apiUrl = `/api/calendarApi?date=${formattedDate}`;
         console.log('URL para fetchApodData:', apiUrl);
     
@@ -56,7 +55,6 @@ export default function Calendar() {
         for (let i = 0; i < firstDay; i++) {
             days.push(
                 <span key={`prev-${i}`} className="px-1 text-gray-400 w-14 flex justify-center items-center">
-                    {/* Calcula los días anteriores */}
                 </span>
             );
         }
