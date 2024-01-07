@@ -1,7 +1,7 @@
 import { NasaApiResponse } from "@/types/nasaApiTypes";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextRequest, res: NextResponse) {
     try {
         const apiKey = process.env.API_KEY;
         if (!apiKey) {
@@ -19,7 +19,6 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
             const data: NasaApiResponse = await apiResponse.json();
             return new Response(JSON.stringify(data), { status: 200 });
         } else if (apiResponse.status === 404) {
-            // Si no hay imagen para el día actual, intenta con el día anterior
             const yesterday = new Date(new Date(currentDate).getTime() - 24 * 60 * 60 * 1000);
             currentDate = yesterday.toISOString().split('T')[0];
 
