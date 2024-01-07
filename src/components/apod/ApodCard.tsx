@@ -12,7 +12,7 @@ import Link from 'next/link';
 const ApodCard: React.FC<ApodCardProps> = ({ apodData }) => {
     return (
         <section className="lg:py-16 flex flex-col items-center justify-center text-center max-w-2xl mx-auto p-8 bg=[#232741] ">
-            <Link href={"#SolarSystem"}>
+            <Link href={"/"}>
             <Image className='absolute right-0 top-50' src={"/assets/images/background/spacecraft.png"} width={100} height={100} alt='' />
             <div className="message-container">
                 <p className="astro-message">

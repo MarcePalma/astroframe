@@ -11,18 +11,16 @@ const SolarSystem = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulamos un tiempo de carga de 3 segundos
     const loadingTimeout = setTimeout(() => {
       setLoading(false);
     }, 3000);
 
-    // Limpia el timeout al desmontar el componente
     return () => clearTimeout(loadingTimeout);
   }, []);
 
   return (
     <>
-      {loading && <Loading />} {/* Muestra el Loading durante 3 segundos */}
+      {loading && <Loading />}
       <section className={`solar-system relative ${loading ? 'loading' : ''}`}>
         <div className="astroboy-container relative">
           <Image className='absolute right-0' src={"/assets/images/background/astronaut.png"} width={200} height={200} alt='Astroboy' />

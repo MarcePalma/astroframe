@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import "./Calendar.css";
 import { useRouter } from 'next/navigation';
-import { fetchApodData } from '../../../public/assets/utils/fetchApod';
 import { NasaApiResponse } from '@/types/nasaApiTypes';
+import { useAppState } from '@/context/AppStateContext';
 
 
 export default function Calendar() {
+    const { setApodData } = useAppState();
     const [currentMonth, setCurrentMonth] = useState(0);
     const [currentYear, setCurrentYear] = useState(2024);
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -21,23 +22,26 @@ export default function Calendar() {
     const handleDateClick = (day: number) => {
         const clickedDate = new Date(currentYear, currentMonth, day);
         const formattedDate = clickedDate.toISOString().split('T')[0];
-
+    
         setSelectedDate(formattedDate);
-
-        // Realiza el fetch con la fecha seleccionada
-        // Asume que tienes una función fetchApodData que realiza el fetch
-        fetchApodData(formattedDate)
+    
+        console.log('Fecha seleccionada:', formattedDate);
+    
+        // Verifica la construcción de la URL
+        const apiUrl = `/api/calendarApi?date=${formattedDate}`;
+        console.log('URL para fetchApodData:', apiUrl);
+    
+        fetch(apiUrl)
+            .then((response) => response.json())
             .then((apodData: NasaApiResponse) => {
-                // Redirige a la página /apod con la fecha como parámetro
-                router.push({ pathname: '/apod', query: { date: formattedDate } } as any);
+                setApodData(apodData)
+                router.push("/apod")
             })
             .catch((error: Error) => {
                 console.error('Error al obtener datos de APOD:', error);
-                // Maneja el error según sea necesario
             });
     };
-
-
+    
 
     const getDaysInMonth = () => {
         const firstDay = new Date(currentYear, currentMonth, 1).getDay();
