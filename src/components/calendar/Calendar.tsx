@@ -88,8 +88,8 @@ export default function Calendar() {
     return (
         <section>
             <section>
-                <Image className='Bounce absolute top-10' src={"/assets/images/background/planets.png"} width={400} height={400} alt='Planets'></Image>
-                <Image className="absolute top-40" src={"/assets/images/background/meditatingastroboy.png"} width={400} height={400} alt='Astroboy meditating'></Image>
+                <Image className='Bounce absolute top-10' src={"/assets/images/background/planets.webp"} width={400} height={400} alt='Planets'></Image>
+                <Image className="absolute top-40" src={"/assets/images/background/meditatingastroboy.webp"} width={400} height={400} alt='Astroboy meditating'></Image>
             </section>
             <section className="message-container">
                 <p className="astro-message">
@@ -122,7 +122,6 @@ export default function Calendar() {
                         ))}
                     </div>
                     <div className="flex justify-between font-medium text-sm pb-2 flex-wrap">
-                        {/* Días del mes */}
                         {generateDays()}
                     </div>
                 </div>

@@ -11,7 +11,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
         let currentDate = new Date().toISOString().split('T')[0];
         console.log(currentDate);
 
-        const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${currentDate}`;
+        const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${currentDate}&cacheBust=${Math.random()}`;
+
 
         const apiResponse = await fetch(apiUrl);
 

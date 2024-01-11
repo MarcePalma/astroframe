@@ -23,7 +23,7 @@ const SolarSystem = () => {
       {loading && <Loading />}
       <section className={`solar-system relative ${loading ? 'loading' : ''}`}>
         <div className="astroboy-container relative">
-          <Image className='absolute right-0' src={"/assets/images/background/astronaut.png"} width={200} height={200} alt='Astroboy' />
+          <Image className='absolute right-0' src={"/assets/images/background/astronaut.webp"} width={200} height={200} alt='Astroboy' />
           <div className="messageContainer">
             <p className="message">
               Hello, I&apos;m Astro!
