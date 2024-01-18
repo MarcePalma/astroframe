@@ -28,7 +28,7 @@ const Apod: React.FC = () => {
         };
 
         getApodFromServer();
-    }, []);
+    }, [new Date().toISOString().split('T')[0]]);
 
     return (
         <div id='Apod'>
