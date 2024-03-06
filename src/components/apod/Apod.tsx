@@ -1,4 +1,4 @@
-"use-client"
+"use client"
 import React, { useEffect, useState } from 'react';
 import ApodCard from './ApodCard';
 import { NasaApiResponse } from '@/types/nasaApiTypes';
